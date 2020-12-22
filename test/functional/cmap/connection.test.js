@@ -4,7 +4,7 @@ const { Connection } = require('../../../src/cmap/connection');
 const { connect } = require('../../../src/cmap/connect');
 const { expect } = require('chai');
 const { setupDatabase } = require('../../functional/shared');
-const { ns } = require('../../../src/utils');
+const { ns, HostAddress } = require('../../../src/utils');
 
 describe('Connection - functional/cmap', function () {
   before(function () {
@@ -62,11 +62,11 @@ describe('Connection - functional/cmap', function () {
       }
     },
     test: function (done) {
-      const connectOptions = Object.assign({
-        host: '240.0.0.1',
+      const connectOptions = {
+        hostAddress: new HostAddress('240.0.0.1'),
         connectionType: Connection,
         connectionTimeout: 500
-      });
+      };
 
       connect(connectOptions, err => {
         expect(err).to.exist;
